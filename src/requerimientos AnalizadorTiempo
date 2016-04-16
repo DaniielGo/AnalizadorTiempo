@@ -1,0 +1,46 @@
+Analisis de requerimientos para el TimerSpy desarrollado por jesus Daniel Gomez Garcia
+C.I INCOLMA S.A
+
+OBJETIVOS
+
+Llevar el control por medio de un registro de actividades, El tiempo que utiliza el
+empleado de ocio, dentro de la jornada laboral, con el fin de analizar la informacion
+recolectada.
+
+Requisitos:
+	- Administracion remota
+	- Control tiempo 
+	- Registro actividades en Base de datos
+	- Llevar registro de la fecha en que se realiza el analisis
+	- El desarrollo tiene que afectar lo menos posible el rendimiento del equipo y 
+	estar camuflado, para evitar que el proceso sea detenido por el administrador 
+	de procesos.
+
+Detalle del problema:
+	- Administracion remota:
+		debido que lo que se pretende hacer es pasar desapersivido en los equipos que a 
+		los que se le realize la configuracion del mismo, es por eso que la administracion
+		del dicho equipo, debe ser remota, por lo tanto se hace uso de unas herramientas
+		ya creadas para realizar dicho proceso, se utiliza la herramienta Psexec para que 
+		la administracion sea remota.
+
+
+
+		proceso de activacion:
+			- Inicialmente por medio de una interfaz grafica se carga la informacion correspondiente 
+			a la lista de usuarios disponibles en la empresa, ahora tras cargar la informacion, se 
+			procede a selecionar el usuario objetivo y se oprime el boton de activar,este genera un 
+			archivo.bat con la sentencia requerida por el Psexec para la administracion remota, y 
+			este cree la tarea programa para ejecutar el TimmerSpy
+
+			- Comandos archivos.BAT
+			Comando para el PSexec:
+			cd C:\PStools
+			psexec \\ ip-usuario -u nombreUsuario -p pass-usuario -c cmd.exe
+
+			Comando para CrearTarea diaria:
+			schtasks /CREATE /TN --Nombre Tarea-- /TR --ruta-- /SC DAILY /SD --Fecha inicio-- /ST --Hora--
+
+			Comando para EliminarTarea:
+			schtasks /DELETE /TN --Nombre Tarea-- 
+
